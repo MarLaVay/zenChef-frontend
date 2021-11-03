@@ -26,7 +26,17 @@ export default class IngredientService extends BaseService {
     });
   }
 
-  update(data) {}
+  update(data) {
+    return new Promise((resolve, reject) => {
+      this.axiosApiInstance.put(this.baseUrl, data).then((response) => {
+        if (response.data) {
+          resolve(response.data);
+        } else {
+          reject(response.data.error);
+        }
+      });
+    });
+  }
 
   delete(id) {
     return new Promise((resolve, reject) => {

@@ -21,6 +21,10 @@ const TestComponent = () => {
     ingredientService.create({name: "Courgette"}); 
   }
 
+  const updateIngredient = () => {
+    ingredientService.update({id:8, name: "Toto"}); 
+  }
+
   const getAllIngredient = () => {
     ingredientService.getAll().then(response => console.log(response))
   }
@@ -35,6 +39,7 @@ const TestComponent = () => {
       <button onClick={register}>Register</button><br/>
       <button onClick={getAllIngredient}>Get all ingredients</button><br/>
       <button onClick={createIngredient}>Create ingredient</button><br/>
+      <button onClick={updateIngredient}>Update ingredient</button><br/>
       <button onClick={deleteIngredient}>Delete ingredient</button><br/>
     </div>
   );
