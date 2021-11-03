@@ -7,6 +7,12 @@ const TestComponent = () => {
 
   const userService = new UserService();
   const ingredientService = new IngredientService();
+
+  
+  const register = () => {
+    userService.createUser({userName: "pedro", email: "lito", password: "root"})
+  }
+
   const login = () => {
     userService.login("robert", "Secret");
   }
@@ -15,8 +21,8 @@ const TestComponent = () => {
     ingredientService.create({name: "Courgette"}); 
   }
 
-  const register = () => {
-    userService.createUser({userName: "pedro", email: "lito", password: "root"})
+  const deleteIngredient = () => {
+    ingredientService.delete(9); 
   }
 
   return (
@@ -24,6 +30,7 @@ const TestComponent = () => {
       <button onClick={login}>Login</button><br/>
       <button onClick={register}>Register</button><br/>
       <button onClick={createIngredient}>Create ingredient</button><br/>
+      <button onClick={deleteIngredient}>Delete ingredient</button><br/>
     </div>
   );
 }
