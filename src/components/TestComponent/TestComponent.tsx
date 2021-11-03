@@ -21,6 +21,10 @@ const TestComponent = () => {
     ingredientService.create({name: "Courgette"}); 
   }
 
+  const getAllIngredient = () => {
+    ingredientService.getAll().then(response => console.log(response))
+  }
+
   const deleteIngredient = () => {
     ingredientService.delete(9); 
   }
@@ -29,6 +33,7 @@ const TestComponent = () => {
     <div className={styles.TestComponent}>
       <button onClick={login}>Login</button><br/>
       <button onClick={register}>Register</button><br/>
+      <button onClick={getAllIngredient}>Get all ingredients</button><br/>
       <button onClick={createIngredient}>Create ingredient</button><br/>
       <button onClick={deleteIngredient}>Delete ingredient</button><br/>
     </div>
