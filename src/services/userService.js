@@ -18,7 +18,7 @@ export default class UserService extends BaseService {
       params.append("nameOrEmail", nameOrEmail);
       params.append("password", password);
 
-      console.log(this.axiosApiInstance);
+      // console.log(this.axiosApiInstance);
 
       this.axiosApiInstance
         .post(`http://localhost:8080/api/auth/signin`, params)
