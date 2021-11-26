@@ -10,6 +10,7 @@ import MenuPanel from "./MenuPanel";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Login from "./components/Login";
 
 function App() {
   require("dotenv").config();
@@ -49,6 +50,7 @@ function App() {
             </Container>
           </Box>
         </Box>
+
       </div>
     </BrowserRouter>
   );
