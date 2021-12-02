@@ -3,9 +3,10 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import List from "@mui/material/List";
 import { mainListItems, secondaryListItems } from "./listItems";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 
 export default function MenuPanel(props) {
@@ -48,7 +49,7 @@ export default function MenuPanel(props) {
         }}
       >
         <IconButton onClick={props.toggleDrawer}>
-          <ChevronLeftIcon />
+            { props.open === true ? <ChevronLeftIcon/> : <ChevronRightIcon /> }
         </IconButton>
       </Toolbar>
       <Divider />

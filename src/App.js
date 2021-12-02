@@ -1,30 +1,52 @@
 import * as React from "react";
-import logo from "./logo.svg";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import "./App.css";
+import "./styles/styles.css";
 import IngredientComponent from "./components/IngredientComponent/IngredientComponent";
-import TestComponent from "./components/TestComponent/TestComponent";
 import RecipeComponent from "./components/RecipeComponent/RecipeComponent";
 import ButtonAppBar from "./ButtonAppBar";
 import MenuPanel from "./MenuPanel";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Login from "./components/Login";
+import UserService from "./services/userService";
+import AuthContainer from "./components/AuthComponent/AuthContainer";
 
 function App() {
   require("dotenv").config();
 
-  const [open, setOpen] = React.useState(true);
+    const userService = new UserService()
+    const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  return (
+
+    function PrivateRoute ({component: Component, authed, ...rest}) {
+        return (
+            <Route
+                {...rest}
+                render={(props) => userService.isAuth() === true
+                    ? <Component {...props} />
+                    : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+            />
+        )
+    }
+
+    if (!userService.isAuth()) {
+        return <div className='login-page'>
+
+        <AuthContainer />
+        </div>
+    }
+
+    return (
     <BrowserRouter>
       <div className="App">
-        <Box sx={{ display: "flex" }}>
-          <ButtonAppBar open={open} />
+          <ButtonAppBar />
+        {/*<ButtonAppBar open={open} />*/}
+
+        <Box sx={{ display: "flex"}}>
 
           <MenuPanel open={open} toggleDrawer={toggleDrawer} />
           <Box
@@ -39,12 +61,13 @@ function App() {
               overflow: "auto",
             }}
           >
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }} >
               <Grid container spacing={3}>
                 <Switch>
-                  <Route exact path="/" component={TestComponent} />
-                  <Route path="/ingredient" component={IngredientComponent} />
-                  <Route path="/recipe" component={RecipeComponent} />
+                  <PrivateRoute exact path="/" component={RecipeComponent} />
+                  <PrivateRoute path="/ingredient" component={IngredientComponent} />
+                  <PrivateRoute path="/recipe" component={RecipeComponent} />
+                  {/*<Route path="/login" component={Login} />*/}
                 </Switch>
               </Grid>
             </Container>
