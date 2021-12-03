@@ -30,7 +30,6 @@ function Register() {
         e.preventDefault()
         userService.createUser(inputValue)
             .then(r => {
-                alert("Votre compte : " + r.userName + r.email )
                 console.log("submit Register.js", r)
             })
             .catch(error => console.log("ya une erreur :" , error))
@@ -39,8 +38,7 @@ function Register() {
     return (
         <div className='form-comp cfb'>
             <form onSubmit={handleSubmit} className='sign-up-form cfb'>
-                <h2>Robert, identifie-toi!</h2>
-                <div className='sign-up-form-input'>
+                <h2>Dis-nous tout !</h2>
                     <TextField
                         id='userName'
                         label='Votre nom'
@@ -50,9 +48,9 @@ function Register() {
                         onChange={handleInput}
                         onBlur={handleBlur}
                         // style
-                        margin="normal"
+                        margin="dense"
                         required={true}
-                        size="medium"
+                        size="small"
                         variant="filled"
 
                     />
@@ -65,9 +63,9 @@ function Register() {
                         onChange={handleInput}
                         onBlur={handleBlur}
                         // style
-                        margin="normal"
+                        margin="dense"
                         required={true}
-                        size="medium"
+                        size="small"
                         variant="filled"
                     />
 
@@ -79,15 +77,14 @@ function Register() {
                         defaultValue={inputValue.password}
                         onChange={handleInput}
                         // style
-                        margin="normal"
+                        margin="dense"
                         required={true}
-                        size="medium"
+                        size="small"
                         variant="filled"
 
                     />
-                </div>
                 <div>
-                    <Button variant='contained'  type='submit'>
+                    <Button variant='contained' type='submit'>
                         C'est parti !
                     </Button>
                 </div>

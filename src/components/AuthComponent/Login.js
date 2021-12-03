@@ -39,48 +39,44 @@ function Login() {
     }
 
     return (
-        <div className='form-comp cfb'>
-            <form onSubmit={handleSubmit} className='sign-up-form cfb'>
-                <h2>Robert, identifie-toi!</h2>
-                <div className='sign-up-form-input'>
-                    <TextField
-                        id='nameOrEmail'
-                        label='identifiant'
-                        name='nameOrEmail'
-                        type='text'
-                        defaultValue={inputValue.nameOrEmail}
-                        onChange={handleInput}
-                        onBlur={handleBlur}
-                      // style
-                        margin="normal"
-                        required={true}
-                        size="medium"
-                        variant="filled"
 
+                    <form onSubmit={handleSubmit} className='sign-up-form cfb'>
+                        <h2>Robert, identifie-toi!</h2>
+                            <TextField
+                                id='nameOrEmail'
+                                label='identifiant'
+                                name='nameOrEmail'
+                                type='text'
+                                defaultValue={inputValue.nameOrEmail}
+                                onChange={handleInput}
+                                onBlur={handleBlur}
+                                // style
+                                margin="dense"
+                                required={true}
+                                size="small"
+                                variant="filled"
 
-                    />
-                    <TextField
-                        id='password'
-                        label='mot de passe'
-                        name='password'
-                        type='password'
-                        defaultValue={inputValue.password}
-                        onChange={handleInput}
-                        // style
-                        margin="normal"
-                        required={true}
-                        size="medium"
-                        variant="filled"
+                            />
+                            <TextField
+                                id='password'
+                                label='mot de passe'
+                                name='password'
+                                type='password'
+                                defaultValue={inputValue.password}
+                                onChange={handleInput}
+                                // style
+                                margin="dense"
+                                required={true}
+                                size="small"
+                                variant="filled"
 
-                    />
-                </div>
-                <div>
-                    <Button variant='contained'  type='submit'>
-                        C'est parti !
-                    </Button>
-                </div>
-            </form>
-        </div>
+                            />
+                        <div>
+                            <Button variant='contained' type='submit'>
+                                C'est parti !
+                            </Button>
+                        </div>
+                    </form>
     )
 }
 

@@ -24,7 +24,7 @@ export default class UserService extends BaseService {
                 .post(`http://localhost:8080/api/auth/signin`, params)
                 .then((user) => {
                     if (user.data.accessToken) {
-                        this.setSession(user.data.accessToken);
+                        // this.setSession(user.data.accessToken);
                         console.log('UserService : user connecté')
                         resolve(user);
 
@@ -46,14 +46,21 @@ export default class UserService extends BaseService {
             this.axiosApiInstance
                 .post(`http://localhost:8080/api/auth/signup`, data)
                 .then((response) => {
-                    if (response.data.user) {
-                        this.setSession(response.data.accessToken);
-                        console.log("userService resolve", response.data.user)
-                        resolve(response.data.user);
-                    } else {
-                        console.log("userService reject", response.data.error)
-                        reject(response.data.error);
-                    }
+                    console.log(response)
+                    console.log(response.data)
+                    //TODO récupérer le user
+                    // if (response.data.user) {
+                    //     // this.setSession(response.data.accessToken);
+                    //     // console.log("userService resolve", response.data.user)
+                    //     // resolve(response.data.user);
+                    // } else {
+                    //     console.log("userService reject", response.data.error)
+                    //     reject(response.data.error);
+                    // }
+                })
+                .catch(error => {
+                    console.log("userService catch", error)
+                    reject(error);
                 });
         });
     };
