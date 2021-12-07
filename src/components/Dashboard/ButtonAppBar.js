@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import SvgIcon from "@mui/material/SvgIcon";
 import CssBaseline from "@mui/material/CssBaseline";
-import UserService from "./services/userService";
+import UserService from "../../services/userService";
 
 function HomeIcon(props) {
     return (
@@ -29,7 +29,7 @@ export default function ButtonAppBar(props) {
     return (
         <div>
             {/*<AppBar position="absolute" open={props.open}>*/}
-            <AppBar position="sticky">
+            <AppBar position="sticky" sx={{backgroundColor: '#BF8686'}}>
                 <CssBaseline/>
                 <Toolbar>
                     <IconButton
@@ -37,7 +37,7 @@ export default function ButtonAppBar(props) {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{mr: 2}}
+                        sx={{mr: 2, backgroundColor: '#BF8686'}}
                     >
                         <HomeIcon/>
                         {/* <MenuIcon /> */}

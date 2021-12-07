@@ -32,6 +32,7 @@ function Login() {
         e.preventDefault() //empeche le changement de page
         userService.login(inputValue.nameOrEmail, inputValue.password)
             .then(success => {
+                console.log(success)
                 //ici charge la page à nouveau et passe par le Router
                 window.location.reload()
             })

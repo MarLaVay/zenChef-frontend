@@ -24,7 +24,7 @@ export default class UserService extends BaseService {
                 .post(`http://localhost:8080/api/auth/signin`, params)
                 .then((user) => {
                     if (user.data.accessToken) {
-                        // this.setSession(user.data.accessToken);
+                        this.setSession(user.data.accessToken);
                         console.log('UserService : user connecté')
                         resolve(user);
 
@@ -47,7 +47,7 @@ export default class UserService extends BaseService {
                 .post(`http://localhost:8080/api/auth/signup`, data)
                 .then((response) => {
                     console.log(response)
-                    console.log(response.data)
+                    resolve(response)
                     //TODO récupérer le user
                     // if (response.data.user) {
                     //     // this.setSession(response.data.accessToken);

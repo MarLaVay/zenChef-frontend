@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 import {withStyles} from "@material-ui/core";
 import {Box} from "@mui/material";
 
+//paramètre l'ouverture du toast qui valide la création d'un nouveau compte
+
 const styleSheet = theme => ({
         root: {
             [theme.breakpoints.down('sm')]: {
@@ -31,7 +33,7 @@ const styleSheet = theme => ({
     })
 ;
 
-function AuthContainer({classes}) {
+function AuthContainer({classes, setSnackBar}) {
     const [welcome, setWelcome] = useState(false);
 
 
@@ -64,7 +66,7 @@ function AuthContainer({classes}) {
             </Box>
             <Box  alignItems='center' justify='center' className={setFormClass()}>
                 {welcome ?
-                    <Register/> : <Login/>
+                    <Register setSnackBar={setSnackBar} setWelcome={setWelcome} /> : <Login />
                 }
             </Box>
         </Grid>

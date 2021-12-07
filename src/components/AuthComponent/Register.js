@@ -2,12 +2,13 @@ import {useState} from "react";
 import {Button, TextField} from "@mui/material";
 import UserService from "../../services/userService";
 
-function Register() {
+function Register({setSnackBar, setWelcome}) {
     const [inputValue, setInputValue] = useState({
         userName: '',
         email: '',
         password: ''
     })
+
 
     const handleInput = ({currentTarget}) => {
         const {value, name} = currentTarget
@@ -30,59 +31,67 @@ function Register() {
         e.preventDefault()
         userService.createUser(inputValue)
             .then(r => {
-                console.log("submit Register.js", r)
-            })
-            .catch(error => console.log("ya une erreur :" , error))
+                    console.log("submit Register.js", r.data.message);
+                    setSnackBar({
+                        open: true,
+                        message: r.data.message,
+                        severity: 'success'
+                    });
+                    // TODO charger le snack APRES la redirection
+                    window.location.reload()
+                }
+            )
+            .catch(error => console.log("ya une erreur :", error))
     }
 
     return (
         <div className='form-comp cfb'>
             <form onSubmit={handleSubmit} className='sign-up-form cfb'>
                 <h2>Dis-nous tout !</h2>
-                    <TextField
-                        id='userName'
-                        label='Votre nom'
-                        name='userName'
-                        type='text'
-                        defaultValue={inputValue.userName}
-                        onChange={handleInput}
-                        onBlur={handleBlur}
-                        // style
-                        margin="dense"
-                        required={true}
-                        size="small"
-                        variant="filled"
+                <TextField
+                    id='userName'
+                    label='Votre nom'
+                    name='userName'
+                    type='text'
+                    defaultValue={inputValue.userName}
+                    onChange={handleInput}
+                    onBlur={handleBlur}
+                    // style
+                    margin="dense"
+                    required={true}
+                    size="small"
+                    variant="filled"
 
-                    />
-                    <TextField
-                        id='email'
-                        label='Votre e-mail'
-                        name='email'
-                        type='text'
-                        defaultValue={inputValue.email}
-                        onChange={handleInput}
-                        onBlur={handleBlur}
-                        // style
-                        margin="dense"
-                        required={true}
-                        size="small"
-                        variant="filled"
-                    />
+                />
+                <TextField
+                    id='email'
+                    label='Votre e-mail'
+                    name='email'
+                    type='text'
+                    defaultValue={inputValue.email}
+                    onChange={handleInput}
+                    onBlur={handleBlur}
+                    // style
+                    margin="dense"
+                    required={true}
+                    size="small"
+                    variant="filled"
+                />
 
-                    <TextField
-                        id='password'
-                        label='mot de passe'
-                        name='password'
-                        type='password'
-                        defaultValue={inputValue.password}
-                        onChange={handleInput}
-                        // style
-                        margin="dense"
-                        required={true}
-                        size="small"
-                        variant="filled"
+                <TextField
+                    id='password'
+                    label='mot de passe'
+                    name='password'
+                    type='password'
+                    defaultValue={inputValue.password}
+                    onChange={handleInput}
+                    // style
+                    margin="dense"
+                    required={true}
+                    size="small"
+                    variant="filled"
 
-                    />
+                />
                 <div>
                     <Button variant='contained' type='submit'>
                         C'est parti !
