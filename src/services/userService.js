@@ -18,8 +18,6 @@ export default class UserService extends BaseService {
             params.append("nameOrEmail", nameOrEmail);
             params.append("password", password);
 
-            // console.log(this.axiosApiInstance);
-
             this.axiosApiInstance
                 .post(`http://localhost:8080/api/auth/signin`, params)
                 .then((user) => {
@@ -48,15 +46,6 @@ export default class UserService extends BaseService {
                 .then((response) => {
                     console.log(response)
                     resolve(response)
-                    //TODO récupérer le user
-                    // if (response.data.user) {
-                    //     // this.setSession(response.data.accessToken);
-                    //     // console.log("userService resolve", response.data.user)
-                    //     // resolve(response.data.user);
-                    // } else {
-                    //     console.log("userService reject", response.data.error)
-                    //     reject(response.data.error);
-                    // }
                 })
                 .catch(error => {
                     console.log("userService catch", error)
