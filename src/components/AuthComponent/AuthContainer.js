@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import {withStyles} from "@material-ui/core";
 import {Box} from "@mui/material";
 
-//paramètre l'ouverture du toast qui valide la création d'un nouveau compte
 
 const styleSheet = theme => ({
         root: {

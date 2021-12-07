@@ -20,12 +20,6 @@ function Login() {
     }
 
 
-    function handleBlur() {
-        // if (!inputValue.includes('@')) {
-        //     alert("Attention, il n'y a pas d'@, ceci n'est pas une adresse valide 😥")
-        // }
-    }
-
 
     const handleSubmit = async (e) => {
         const userService = new UserService();
@@ -50,7 +44,6 @@ function Login() {
                                 type='text'
                                 defaultValue={inputValue.nameOrEmail}
                                 onChange={handleInput}
-                                onBlur={handleBlur}
                                 // style
                                 margin="dense"
                                 required={true}

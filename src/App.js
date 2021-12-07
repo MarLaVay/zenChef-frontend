@@ -13,15 +13,6 @@ import Grid from "@mui/material/Grid";
 import UserService from "./services/userService";
 import AuthContainer from "./components/AuthComponent/AuthContainer";
 import {Alert, Snackbar} from "@mui/material";
-// import Login from "./components/AuthComponent/Login";
-
-
-// const SnackBarSeverity = {
-//     success: 'success',
-//     fail: 'error',
-//     blue: 'info',
-//     orange: 'warning'
-// }
 
 
 function App() {
@@ -54,6 +45,7 @@ function App() {
 
     if (!userService.isAuth()) {
         return <div className='login-page'>
+            {/*SnackBar appelé dans Register.js*/}
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "left"}}
                       open={snackBarState.open}>
                 <Alert severity={snackBarState.severity} sx={{width: '100%'}}>{snackBarState.message}</Alert>
@@ -92,13 +84,6 @@ function App() {
                                     <PrivateRoute path="/recipe" component={RecipeComponent}/>
                                     {/*<Route path="/login" component={Login} />*/}
                                 </Switch>
-                                {/*SnackBar appelé dans Register.js*/}
-                                <Snackbar anchorOrigin={{vertical: "top", horizontal: "left"}}
-                                          open={snackBarState.open}
-                                          message={snackBarState.message}>
-                                    <Alert severity={snackBarState.severity}
-                                           sx={{width: '100%'}}>{snackBarState.message}</Alert>
-                                </Snackbar>
                             </Grid>
                         </Container>
                     </Box>
