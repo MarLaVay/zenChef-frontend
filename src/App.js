@@ -1,9 +1,8 @@
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import "./styles/App.css";
 import "./styles/styles.css";
-import IngredientComponent from "./components/IngredientComponent/IngredientComponent";
 import RecipeComponent from "./components/RecipeComponent/RecipeComponent";
 import ButtonAppBar from "./components/Dashboard/ButtonAppBar";
 import MenuPanel from "./components/Dashboard/MenuPanel";
@@ -13,16 +12,21 @@ import Grid from "@mui/material/Grid";
 import UserService from "./services/userService";
 import AuthContainer from "./components/AuthComponent/AuthContainer";
 import {Alert, Snackbar} from "@mui/material";
+import RecipeService from "./services/recipeService";
+import IngredientComponent from "./components/IngredientComponent/IngredientComponent";
 
 
 function App() {
     require("dotenv").config();
 
     const userService = new UserService()
+    const recipeService = new RecipeService();
+
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
     };
+    const [recipes, setRecipes] = useState([])
 
     const [snackBarState, setSnackBarState] = useState({
         open: false,
@@ -31,6 +35,11 @@ function App() {
 
     })
 
+    useEffect(() => {
+        recipeService.getAll().then((resp) => {
+            setRecipes(resp)
+        })
+    }, []);
 
     function PrivateRoute({component: Component, authed, ...rest}) {
         return (
@@ -79,10 +88,12 @@ function App() {
                         <Container maxWidth="lg" sx={{mt: 3, mb: 4}}>
                             <Grid container spacing={3}>
                                 <Switch>
-                                    <PrivateRoute exact path="/" component={RecipeComponent}/>
+                                    <PrivateRoute exact path="/"
+                                                  component={() => <RecipeComponent recipes={recipes} />}
+                                    />
                                     <PrivateRoute path="/ingredient" component={IngredientComponent}/>
-                                    <PrivateRoute path="/recipe" component={RecipeComponent}/>
-                                    {/*<Route path="/login" component={Login} />*/}
+                                    <PrivateRoute path="/recipe" component={() => <RecipeComponent recipes={recipes} />}/>
+                                    {/*<Route path="/login" component={Login} /> //TODO gérer ce lien */}
                                 </Switch>
                             </Grid>
                         </Container>
