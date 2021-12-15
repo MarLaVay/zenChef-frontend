@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {FormControl, Input, InputAdornment, InputLabel} from "@material-ui/core";
-import SaveIcon from '@mui/icons-material/Save';
-import IconButton from "@mui/material/IconButton";
 import IngredientService from "../../services/ingredientService";
+import {FormControl, Input, InputAdornment, InputLabel} from "@material-ui/core";
+import IconButton from "@mui/material/IconButton";
+import SaveIcon from "@mui/icons-material/Save";
 
-function IngredientForm({ingredients, setIngredients}) {
+function IngredientCreateForm({ingredients, setIngredients}) {
 
     const initialState = {
         name: ''
@@ -29,7 +29,7 @@ function IngredientForm({ingredients, setIngredients}) {
     }
 
     return (
-        <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
+        <FormControl sx={{m: 1, border: "1px"}} variant="standard" fullWidth={true}>
             <InputLabel htmlFor="ingrName">Nouvel ingrédient</InputLabel>
             <Input
                 id="ingrName"
@@ -37,8 +37,7 @@ function IngredientForm({ingredients, setIngredients}) {
                 type='text'
                 aria-label="Nom du nouvel ingrédient"
                 size="small"
-                variant="standard"
-                width="100%"
+                variant="outlined"
                 value={inputValue.name}
                 onChange={handleInput}
                 endAdornment={
@@ -47,14 +46,14 @@ function IngredientForm({ingredients, setIngredients}) {
                             aria-label="save new ingredient"
                             variant="outlined"
                             onClick={handleSubmit}
-                        ><SaveIcon fontSize="small" color="secondary"/>
+                        >
+                            <SaveIcon fontSize="small" color="secondary"/>
                         </IconButton>
                     </InputAdornment>
                 }
             />
         </FormControl>
-
-    );
+    )
 }
 
-export default IngredientForm;
+export default IngredientCreateForm;
