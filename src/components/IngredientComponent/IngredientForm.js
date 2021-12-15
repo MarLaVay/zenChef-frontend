@@ -1,48 +1,59 @@
-import React from 'react';
-import Button from "@mui/material/Button";
-import {FormControl, Input, InputLabel, TextField} from "@material-ui/core";
+import React, {useState} from 'react';
+import {FormControl, Input, InputAdornment, InputLabel} from "@material-ui/core";
 import SaveIcon from '@mui/icons-material/Save';
+import IconButton from "@mui/material/IconButton";
+import IngredientService from "../../services/ingredientService";
 
+function IngredientForm({ingredients, setIngredients}) {
 
-function IngredientForm(props) {
-    function handleSubmit() {
-        return undefined
+    const initialState = {
+        name: ''
+    }
+    const [inputValue, setInputValue] = useState(initialState)
+
+    const handleInput = ({currentTarget}) => {
+        const {value, name} = currentTarget
+        setInputValue({
+            [name]: value
+        })
+    }
+
+    function handleSubmit(e) {
+        const ingredientService = new IngredientService();
+        e.preventDefault()
+        ingredientService.create(inputValue)
+            .then(response => {
+                setIngredients([...ingredients, response])
+            })
+        setInputValue(initialState)
     }
 
     return (
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+        <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
             <InputLabel htmlFor="ingrName">Nouvel ingrédient</InputLabel>
             <Input
                 id="ingrName"
+                name="name"
                 type='text'
-                value={values.password}
-                onChange={handleChange('password')}
+                aria-label="Nom du nouvel ingrédient"
+                size="small"
+                variant="standard"
+                width="100%"
+                value={inputValue.name}
+                onChange={handleInput}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                        >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            aria-label="save new ingredient"
+                            variant="outlined"
+                            onClick={handleSubmit}
+                        ><SaveIcon fontSize="small" color="secondary"/>
                         </IconButton>
                     </InputAdornment>
                 }
             />
         </FormControl>
 
-        // <form onSubmit={handleSubmit}>
-        // <TextField
-        //     aria-label="Nom du nouvel ingrédient"
-        //     id="ingrName"
-        //     name="ingrName"
-        //     type="text"
-        //     label='Nouvel ingrédient'
-        //     size="small"
-        //     variant="standard"
-        // />
-        //         <Button variant="outlined" color="success" size="small" startIcon={<SaveIcon />} type="submit">OK</Button>
-        // </form>
     );
 }
 

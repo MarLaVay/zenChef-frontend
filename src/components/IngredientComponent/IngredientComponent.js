@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import {styled} from '@mui/material/styles';
 import {ListItem, ListItemText} from "@mui/material";
-import {EditRounded, ModeEdit} from "@mui/icons-material";
+import {EditRounded} from "@mui/icons-material";
 import IngredientForm from "./IngredientForm";
 
 
@@ -20,13 +20,6 @@ const IngredientComponent = () => {
     const [ingredients, setIngredients] = useState([]);
     const [editItem, setEditItem] = useState(false)
 
-
-    function createIngredient() {
-        ingredientService.create({name: "Courgette" + Math.floor(Math.random() * 100)})
-            .then(response => {
-                setIngredients([...ingredients, response])
-            });
-    }
 
     function updateIngredient() {
         ingredientService.update({id: 91, name: "Toto"}).then(r => console.log(r));
@@ -54,16 +47,15 @@ const IngredientComponent = () => {
 
 
     function handleEdit(id) {
-        return undefined;
+        setEditItem(true);
     }
 
     return (
         <Box sx={{flexGrow: 1, maxWidth: 752}}>
-            {/*<div className={styles.IngredientComponent}>*/}
             <Grid item xs={12} md={5}>
                 <Demo>
                     <List dense={true}>
-                        <ListItem><IngredientForm/></ListItem>
+                        <ListItem><IngredientForm ingredients={ingredients} setIngredients={setIngredients} /></ListItem>
                         {ingredients
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((ingredient) =>
@@ -88,11 +80,6 @@ const IngredientComponent = () => {
                     </List>
                 </Demo>
             </Grid>
-            <button onClick={createIngredient}>Create ingredient</button>
-            <br/>
-            <button onClick={updateIngredient}>Update ingredient</button>
-            <br/>
-            {/*</div>*/}
         </Box>
     );
 }
