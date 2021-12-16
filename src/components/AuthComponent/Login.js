@@ -30,7 +30,7 @@ function Login() {
                 //ici charge la page à nouveau et passe par le Router
                 window.location.reload()
             })
-            .catch(failureCallback => console.log("erreur d'authentification"))
+            .catch(() => console.log("erreur d'authentification"))
     }
 
     return (
